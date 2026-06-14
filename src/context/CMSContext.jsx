@@ -198,7 +198,7 @@ export const CMSProvider = ({ children }) => {
     };
 
     const login = (username, password) => {
-        if (username === 'admin' && password === 'admin') {
+        if (username === 'Naufa Nur' && password === '257257') {
             setIsAuthenticated(true);
             localStorage.setItem('riversideAdminAuth', 'true');
             return true;
