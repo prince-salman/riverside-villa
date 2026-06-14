@@ -3,13 +3,14 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { CMSContext } from '@/context/CMSContext';
 import Image from 'next/image';
-import { MapPin, Phone, Mail, Star, ChevronDown, ChevronUp, X, MessageCircle } from 'lucide-react';
+import { MapPin, Phone, Mail, Star, ChevronDown, ChevronUp, X, MessageCircle, Menu } from 'lucide-react';
 
 export default function Home() {
   const { data, lang, changeLanguage, isMounted } = useContext(CMSContext);
   const [scrolled, setScrolled] = useState(false);
   const [lightboxImg, setLightboxImg] = useState<string | null>(null);
   const [openFaq, setOpenFaq] = useState<number | null>(null);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -60,11 +61,18 @@ export default function Home() {
 
       {/* Ultra Premium Navbar */}
       <header className={`fixed top-0 w-full z-40 transition-all duration-700 ${scrolled ? 'bg-[#F9F8F6]/95 backdrop-blur-xl py-3 md:py-5 shadow-sm' : 'bg-[#F9F8F6]/80 backdrop-blur-md py-4 md:py-6'}`}>
-        <div className="max-w-7xl mx-auto px-4 md:px-12 flex flex-col md:flex-row justify-between items-center gap-4 md:gap-6">
-          <h1 className="text-lg md:text-xl font-bold tracking-[0.25em] uppercase text-[#1A1A1A] text-center">{data.brand?.name || 'RIVERSIDE VILLA'}</h1>
-          <nav className="flex flex-col md:flex-row items-center gap-4 md:gap-10">
-            <ul className="flex flex-wrap justify-center gap-4 sm:gap-8 list-none">
-              {data.hero.visible && <li><a href="#about" onClick={(e) => { e.preventDefault(); scrollToSection('about'); }} className="text-[10px] md:text-[11px] font-bold uppercase tracking-[0.2em] text-[#1A1A1A] opacity-60 hover:opacity-100 transition-opacity">{lang === 'id' ? 'Tentang' : 'About'}</a></li>}
+        <div className="max-w-7xl mx-auto px-6 md:px-12 flex justify-between items-center">
+          <h1 className="text-lg md:text-xl font-bold tracking-[0.25em] uppercase text-[#1A1A1A]">{data.brand?.name || 'RIVERSIDE VILLA'}</h1>
+          
+          {/* Hamburger Menu Icon (Mobile Only) */}
+          <button className="md:hidden p-2 text-[#1A1A1A]" onClick={() => setIsMobileMenuOpen(true)}>
+            <Menu size={24} />
+          </button>
+
+          {/* Desktop Navigation */}
+          <nav className="hidden md:flex flex-row items-center gap-10">
+            <ul className="flex justify-center gap-8 list-none">
+              {data.hero.visible && <li><a href="#about" onClick={(e) => { e.preventDefault(); scrollToSection('about'); }} className="text-[11px] font-bold uppercase tracking-[0.2em] text-[#1A1A1A] opacity-60 hover:opacity-100 transition-opacity">{lang === 'id' ? 'Tentang' : 'About'}</a></li>}
               {data.facilities.visible && <li><a href="#facilities" onClick={(e) => { e.preventDefault(); scrollToSection('facilities'); }} className="text-[11px] font-bold uppercase tracking-[0.2em] text-[#1A1A1A] opacity-60 hover:opacity-100 transition-opacity">{lang === 'id' ? 'Fasilitas' : 'Facilities'}</a></li>}
               {data.gallery.visible && <li><a href="#gallery" onClick={(e) => { e.preventDefault(); scrollToSection('gallery'); }} className="text-[11px] font-bold uppercase tracking-[0.2em] text-[#1A1A1A] opacity-60 hover:opacity-100 transition-opacity">{lang === 'id' ? 'Galeri' : 'Gallery'}</a></li>}
               {data.pricing.visible && <li><a href="#pricing" onClick={(e) => { e.preventDefault(); scrollToSection('pricing'); }} className="text-[11px] font-bold uppercase tracking-[0.2em] text-[#1A1A1A] opacity-60 hover:opacity-100 transition-opacity">{lang === 'id' ? 'Harga' : 'Pricing'}</a></li>}
@@ -79,6 +87,27 @@ export default function Home() {
           </nav>
         </div>
       </header>
+
+      {/* Mobile Menu Overlay */}
+      {isMobileMenuOpen && (
+        <div className="fixed inset-0 z-50 bg-[#F9F8F6] flex flex-col items-center justify-center md:hidden">
+          <button className="absolute top-6 right-6 p-2 text-[#1A1A1A]" onClick={() => setIsMobileMenuOpen(false)}>
+            <X size={32} strokeWidth={1.5} />
+          </button>
+          <ul className="flex flex-col items-center gap-8 list-none text-center">
+            {data.hero.visible && <li><a href="#about" onClick={(e) => { e.preventDefault(); setIsMobileMenuOpen(false); scrollToSection('about'); }} className="text-sm font-bold uppercase tracking-[0.2em] text-[#1A1A1A] opacity-70 hover:opacity-100">{lang === 'id' ? 'Tentang' : 'About'}</a></li>}
+            {data.facilities.visible && <li><a href="#facilities" onClick={(e) => { e.preventDefault(); setIsMobileMenuOpen(false); scrollToSection('facilities'); }} className="text-sm font-bold uppercase tracking-[0.2em] text-[#1A1A1A] opacity-70 hover:opacity-100">{lang === 'id' ? 'Fasilitas' : 'Facilities'}</a></li>}
+            {data.gallery.visible && <li><a href="#gallery" onClick={(e) => { e.preventDefault(); setIsMobileMenuOpen(false); scrollToSection('gallery'); }} className="text-sm font-bold uppercase tracking-[0.2em] text-[#1A1A1A] opacity-70 hover:opacity-100">{lang === 'id' ? 'Galeri' : 'Gallery'}</a></li>}
+            {data.pricing.visible && <li><a href="#pricing" onClick={(e) => { e.preventDefault(); setIsMobileMenuOpen(false); scrollToSection('pricing'); }} className="text-sm font-bold uppercase tracking-[0.2em] text-[#1A1A1A] opacity-70 hover:opacity-100">{lang === 'id' ? 'Harga' : 'Pricing'}</a></li>}
+            {data.booking.visible && <li><a href="#booking" onClick={(e) => { e.preventDefault(); setIsMobileMenuOpen(false); scrollToSection('booking'); }} className="text-sm font-bold uppercase tracking-[0.2em] text-[#1A1A1A] opacity-70 hover:opacity-100">{lang === 'id' ? 'Pemesanan' : 'Booking'}</a></li>}
+          </ul>
+          <div className="flex items-center gap-4 text-sm font-bold tracking-[0.2em] text-[#1A1A1A] mt-12">
+            <button onClick={() => { changeLanguage('id'); setIsMobileMenuOpen(false); }} className={`transition-all ${lang === 'id' ? 'opacity-100 border-b border-[#1A1A1A] pb-0.5' : 'opacity-40 hover:opacity-100'}`}>ID</button>
+            <span className="opacity-20">|</span>
+            <button onClick={() => { changeLanguage('en'); setIsMobileMenuOpen(false); }} className={`transition-all ${lang === 'en' ? 'opacity-100 border-b border-[#1A1A1A] pb-0.5' : 'opacity-40 hover:opacity-100'}`}>EN</button>
+          </div>
+        </div>
+      )}
 
       <main>
         {/* Immersive Cinematic Hero Section */}
