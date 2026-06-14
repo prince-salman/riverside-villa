@@ -147,12 +147,12 @@ export default function Home() {
               <div className="flex flex-col items-center text-center mb-16">
                 <h2 className="text-3xl md:text-4xl font-bold tracking-wide">{getT(data.gallery, 'title')}</h2>
               </div>
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+              <div className="flex overflow-x-auto gap-4 pb-8 snap-x snap-mandatory hide-scrollbar">
                 {data.gallery.items.map((item: any) => (
-                  <div key={item.id} className="relative aspect-square overflow-hidden cursor-pointer group" onClick={() => setLightboxImg(item.url)}>
-                    <Image src={item.url} alt="Gallery" fill className="object-cover transition-transform duration-500 group-hover:scale-110" />
+                  <div key={item.id} className="relative flex-none w-[85vw] sm:w-[45vw] lg:w-[28vw] aspect-[4/5] sm:aspect-square overflow-hidden cursor-pointer group snap-center" onClick={() => setLightboxImg(item.url)}>
+                    <Image src={item.url} alt="Gallery" fill className="object-cover transition-transform duration-700 group-hover:scale-105" />
                     <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors flex items-center justify-center">
-                      <span className="text-white opacity-0 group-hover:opacity-100 font-bold uppercase tracking-widest text-sm transition-opacity">Zoom</span>
+                      <span className="text-white opacity-0 group-hover:opacity-100 font-medium uppercase tracking-widest text-sm transition-opacity">Zoom</span>
                     </div>
                   </div>
                 ))}

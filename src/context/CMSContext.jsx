@@ -31,7 +31,11 @@ const defaultData = {
             { id: 1, url: '/images/hero.png' },
             { id: 2, url: '/images/bedroom.png' },
             { id: 3, url: '/images/pool.png' },
-            { id: 4, url: '/images/lounge.png' }
+            { id: 4, url: '/images/lounge.png' },
+            { id: 5, url: '/images/bedroom.png' },
+            { id: 6, url: '/images/pool.png' },
+            { id: 7, url: '/images/hero.png' },
+            { id: 8, url: '/images/lounge.png' }
         ]
     },
     pricing: {
