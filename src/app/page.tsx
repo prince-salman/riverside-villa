@@ -59,12 +59,12 @@ export default function Home() {
       )}
 
       {/* Ultra Premium Navbar */}
-      <header className={`fixed top-0 w-full z-40 transition-all duration-700 ${scrolled ? 'bg-[#F9F8F6]/95 backdrop-blur-xl py-5 shadow-sm' : 'bg-[#F9F8F6]/80 backdrop-blur-md py-6'}`}>
-        <div className="max-w-7xl mx-auto px-6 md:px-12 flex flex-col md:flex-row justify-between items-center gap-6">
-          <h1 className="text-xl font-bold tracking-[0.25em] uppercase text-[#1A1A1A]">{data.brand?.name || 'RIVERSIDE VILLA'}</h1>
-          <nav className="flex flex-col md:flex-row items-center gap-6 md:gap-10">
-            <ul className="flex flex-wrap justify-center gap-8 list-none">
-              {data.hero.visible && <li><a href="#about" onClick={(e) => { e.preventDefault(); scrollToSection('about'); }} className="text-[11px] font-bold uppercase tracking-[0.2em] text-[#1A1A1A] opacity-60 hover:opacity-100 transition-opacity">{lang === 'id' ? 'Tentang' : 'About'}</a></li>}
+      <header className={`fixed top-0 w-full z-40 transition-all duration-700 ${scrolled ? 'bg-[#F9F8F6]/95 backdrop-blur-xl py-3 md:py-5 shadow-sm' : 'bg-[#F9F8F6]/80 backdrop-blur-md py-4 md:py-6'}`}>
+        <div className="max-w-7xl mx-auto px-4 md:px-12 flex flex-col md:flex-row justify-between items-center gap-4 md:gap-6">
+          <h1 className="text-lg md:text-xl font-bold tracking-[0.25em] uppercase text-[#1A1A1A] text-center">{data.brand?.name || 'RIVERSIDE VILLA'}</h1>
+          <nav className="flex flex-col md:flex-row items-center gap-4 md:gap-10">
+            <ul className="flex flex-wrap justify-center gap-4 sm:gap-8 list-none">
+              {data.hero.visible && <li><a href="#about" onClick={(e) => { e.preventDefault(); scrollToSection('about'); }} className="text-[10px] md:text-[11px] font-bold uppercase tracking-[0.2em] text-[#1A1A1A] opacity-60 hover:opacity-100 transition-opacity">{lang === 'id' ? 'Tentang' : 'About'}</a></li>}
               {data.facilities.visible && <li><a href="#facilities" onClick={(e) => { e.preventDefault(); scrollToSection('facilities'); }} className="text-[11px] font-bold uppercase tracking-[0.2em] text-[#1A1A1A] opacity-60 hover:opacity-100 transition-opacity">{lang === 'id' ? 'Fasilitas' : 'Facilities'}</a></li>}
               {data.gallery.visible && <li><a href="#gallery" onClick={(e) => { e.preventDefault(); scrollToSection('gallery'); }} className="text-[11px] font-bold uppercase tracking-[0.2em] text-[#1A1A1A] opacity-60 hover:opacity-100 transition-opacity">{lang === 'id' ? 'Galeri' : 'Gallery'}</a></li>}
               {data.pricing.visible && <li><a href="#pricing" onClick={(e) => { e.preventDefault(); scrollToSection('pricing'); }} className="text-[11px] font-bold uppercase tracking-[0.2em] text-[#1A1A1A] opacity-60 hover:opacity-100 transition-opacity">{lang === 'id' ? 'Harga' : 'Pricing'}</a></li>}
@@ -99,7 +99,7 @@ export default function Home() {
               <span className="text-[#F9F8F6]/80 tracking-[0.4em] text-xs uppercase font-bold mb-8">
                 {lang === 'id' ? 'Selamat Datang Di' : 'Welcome To'}
               </span>
-              <h2 className="text-5xl md:text-7xl font-medium tracking-wide mb-8 leading-tight text-[#F9F8F6] drop-shadow-lg">
+              <h2 className="text-4xl sm:text-5xl md:text-7xl font-medium tracking-wide mb-6 md:mb-8 leading-tight text-[#F9F8F6] drop-shadow-lg px-2">
                 {getT(data.hero, 'title')}
               </h2>
               <div className="w-12 h-[1px] bg-[#F9F8F6]/50 mb-8"></div>
@@ -124,7 +124,7 @@ export default function Home() {
               <h2 className="text-3xl md:text-4xl font-bold tracking-wide">{getT(data.facilities, 'title')}</h2>
             </div>
             
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-10">
               {data.facilities.items.map((item: any) => (
                 <div key={item.id} className="group cursor-pointer">
                   <div className="overflow-hidden rounded-sm mb-6 aspect-[4/3] bg-gray-200 relative">
@@ -190,18 +190,18 @@ export default function Home() {
               <div className="text-center mb-16">
                 <h2 className="text-3xl md:text-4xl font-bold tracking-wide">{getT(data.pricing, 'title')}</h2>
               </div>
-              <div className="flex flex-col gap-6">
-                <div className="flex flex-col md:flex-row justify-between items-center p-8 border border-white/20 bg-white/5 hover:bg-white/10 transition-colors">
-                  <span className="text-lg font-medium text-gray-300 mb-2 md:mb-0">Senin - Kamis (Weekday)</span>
-                  <span className="text-2xl font-bold">{data.pricing.weekday}</span>
+              <div className="flex flex-col gap-4 md:gap-6">
+                <div className="flex flex-col md:flex-row justify-between items-center p-6 md:p-8 border border-white/20 bg-white/5 hover:bg-white/10 transition-colors text-center md:text-left">
+                  <span className="text-base md:text-lg font-medium text-gray-300 mb-2 md:mb-0">Senin - Kamis (Weekday)</span>
+                  <span className="text-xl md:text-2xl font-bold">{data.pricing.weekday}</span>
                 </div>
-                <div className="flex flex-col md:flex-row justify-between items-center p-8 border border-white/20 bg-white/5 hover:bg-white/10 transition-colors">
-                  <span className="text-lg font-medium text-gray-300 mb-2 md:mb-0">Jumat - Minggu (Weekend)</span>
-                  <span className="text-2xl font-bold">{data.pricing.weekend}</span>
+                <div className="flex flex-col md:flex-row justify-between items-center p-6 md:p-8 border border-white/20 bg-white/5 hover:bg-white/10 transition-colors text-center md:text-left">
+                  <span className="text-base md:text-lg font-medium text-gray-300 mb-2 md:mb-0">Jumat - Minggu (Weekend)</span>
+                  <span className="text-xl md:text-2xl font-bold">{data.pricing.weekend}</span>
                 </div>
-                <div className="flex flex-col md:flex-row justify-between items-center p-8 border border-white/20 bg-white/5 hover:bg-white/10 transition-colors">
-                  <span className="text-lg font-medium text-gray-300 mb-2 md:mb-0">{lang === 'id' ? 'Hari Libur Nasional' : 'National Holidays'}</span>
-                  <span className="text-2xl font-bold">{data.pricing.holiday}</span>
+                <div className="flex flex-col md:flex-row justify-between items-center p-6 md:p-8 border border-white/20 bg-white/5 hover:bg-white/10 transition-colors text-center md:text-left">
+                  <span className="text-base md:text-lg font-medium text-gray-300 mb-2 md:mb-0">{lang === 'id' ? 'Hari Libur Nasional' : 'National Holidays'}</span>
+                  <span className="text-xl md:text-2xl font-bold">{data.pricing.holiday}</span>
                 </div>
               </div>
             </div>
