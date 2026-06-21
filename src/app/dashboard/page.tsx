@@ -47,24 +47,26 @@ export default function AdminDashboard() {
       
       const file = e.target.files[0];
       const formData = new FormData();
-      formData.append('file', file);
+      formData.append('key', 'cf13597c7f55e937e3343aff70c0b81a'); // ImgBB API Key
+      formData.append('image', file);
 
       setUploading(true);
       try {
-        const res = await fetch('/api/upload', {
+        const res = await fetch('https://api.imgbb.com/1/upload', {
           method: 'POST',
           body: formData,
         });
+        
         const result = await res.json();
         
-        if (res.ok && result.url) {
-          onUploadComplete(result.url);
+        if (res.ok && result.success) {
+          onUploadComplete(result.data.url);
         } else {
-          alert('Upload failed: ' + (result.error || 'Unknown error'));
+          alert('Upload failed: ' + (result.error?.message || 'Unknown error'));
         }
-      } catch (error) {
+      } catch (error: any) {
         console.error(error);
-        alert('An error occurred during upload.');
+        alert('An error occurred during upload: ' + error.message);
       } finally {
         setUploading(false);
       }
